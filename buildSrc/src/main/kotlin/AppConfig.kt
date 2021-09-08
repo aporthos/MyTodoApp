@@ -10,4 +10,5 @@ object AppConfig {
     const val buildToolsVersion = "30.0.3"
 
     const val androidTestInstrumentation = "androidx.test.runner.AndroidJUnitRunner"
+    const val proguardConsumerRules =  "consumer-rules.pro"
 }

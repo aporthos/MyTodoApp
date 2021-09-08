@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_ipc">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="net.portes.mytodo.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_ipc"
+        android:name="net.portes.mytodo.ui.ipc.IpcFragment"
+        android:label="@string/title_ipc"
+        tools:layout="@layout/fragment_ipc" />
 
     <fragment
         android:id="@+id/navigation_dashboard"

@@ -1,9 +1,12 @@
 import Dependencies.implementation
 import Dependencies.testImplementation
+import Dependencies.kapt
 
 plugins {
     id("com.android.application")
     kotlin("android")
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -18,6 +21,7 @@ android {
         versionName = AppConfig.versionName
 
         testInstrumentationRunner = AppConfig.androidTestInstrumentation
+        buildConfigField("String", "BASE_URL", "\"https://run.mocky.io\"")
     }
 
     buildTypes {
@@ -46,6 +50,19 @@ dependencies {
     implementation(Dependencies.CORE)
     implementation(Dependencies.NAVIGATION)
     implementation(Dependencies.LIVEDATA)
+    implementation(Dependencies.HILT)
+    kapt(Dependencies.HILT_KAPT)
+    implementation(Dependencies.TIMBER)
+    implementation(Dependencies.MOSHI)
+    kapt(Dependencies.MOSHI_KAPT)
+    implementation(Dependencies.INTERCEPTOR)
+    implementation(Dependencies.RETROFIT)
+    implementation(Dependencies.ANDROID_CHART)
+    implementation(Dependencies.SWIPE_REFRESH)
 
     testImplementation(Dependencies.TESTS)
+    testImplementation(Dependencies.TESTS_COROUTINES)
+
+    implementation(project(":ipc"))
+    implementation(project(":shared"))
 }
