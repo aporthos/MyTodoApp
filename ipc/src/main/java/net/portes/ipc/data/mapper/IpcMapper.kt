@@ -1,7 +1,7 @@
 package net.portes.ipc.data.mapper
 
 import net.portes.ipc.data.models.response.IpcResponse
-import net.portes.ipc.domain.model.IpcDto
+import net.portes.ipc.domain.models.IpcDto
 import net.portes.shared.data.mapper.BaseMapper
 import net.portes.shared.util.DATE_FORMAT
 import net.portes.shared.util.ZERO_FLOAT

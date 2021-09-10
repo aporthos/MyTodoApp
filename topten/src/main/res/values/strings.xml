@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_topten_type_ups">Alzas</string>
+    <string name="title_topten_type_downs">Bajas</string>
+    <string name="title_topten_type_volume">Volumen</string>
+</resources>

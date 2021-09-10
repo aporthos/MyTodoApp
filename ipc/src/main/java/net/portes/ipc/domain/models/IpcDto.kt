@@ -1,4 +1,4 @@
-package net.portes.ipc.domain.model
+package net.portes.ipc.domain.models
 
 /**
  * @author amadeus.portes

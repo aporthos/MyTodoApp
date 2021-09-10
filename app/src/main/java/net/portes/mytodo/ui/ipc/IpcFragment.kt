@@ -7,10 +7,11 @@ import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-import net.portes.ipc.domain.model.IpcDto
+import net.portes.ipc.domain.models.IpcDto
 import net.portes.mytodo.R
 import net.portes.mytodo.databinding.FragmentIpcBinding
 import net.portes.mytodo.ui.base.BaseFragment
@@ -19,10 +20,16 @@ import net.portes.shared.extensions.parseMoney
 import net.portes.shared.ui.base.ViewState
 import net.portes.shared.util.URL_IPC
 import net.portes.shared.util.ZERO_INT
-import java.text.DecimalFormat
 
 @AndroidEntryPoint
 class IpcFragment : BaseFragment<FragmentIpcBinding>(), View.OnClickListener {
+
+    companion object {
+        const val TAG = "IpcFragment"
+        const val TODAY_HOURS = 24
+        const val TWELVE_TODAY = 12
+        const val FOUR_TODAY = 4
+    }
 
     private val viewModel: IpcViewModel by viewModels()
 
@@ -33,9 +40,9 @@ class IpcFragment : BaseFragment<FragmentIpcBinding>(), View.OnClickListener {
         dataBinding().errorLayout.retryButton.setOnClickListener(this)
         dataBinding().ipcChipGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
-                R.id.ipcToday -> viewModel.toFilter(24)
-                R.id.ipcSinceTwelveHours -> viewModel.toFilter(12)
-                R.id.ipcSinceFourHours -> viewModel.toFilter(4)
+                R.id.ipcToday -> viewModel.toFilter(TODAY_HOURS)
+                R.id.ipcSinceTwelveHours -> viewModel.toFilter(TWELVE_TODAY)
+                R.id.ipcSinceFourHours -> viewModel.toFilter(FOUR_TODAY)
             }
         }
         toCreateMenu()
@@ -93,7 +100,7 @@ class IpcFragment : BaseFragment<FragmentIpcBinding>(), View.OnClickListener {
                 hideLoader()
                 if (result.data.isNotEmpty()) {
                     // TODO: 08/09/21 Implementar FactoryMethod
-                    dataBinding().ipcLineChart.isVisible = true
+                    dataBinding().containerNestedScrollView.isVisible = true
                     dataBinding().errorLayout.commonNestedScrollView.isVisible = false
                     LineChartFactory.createLineChart(
                         dataBinding().ipcLineChart,
@@ -102,13 +109,13 @@ class IpcFragment : BaseFragment<FragmentIpcBinding>(), View.OnClickListener {
                         getString(R.string.description_ipc_line_chart)
                     )
                 } else {
-                    dataBinding().ipcLineChart.isVisible = false
+                    dataBinding().containerNestedScrollView.isGone = true
                     dataBinding().errorLayout.commonNestedScrollView.isVisible = true
                 }
             }
             is ViewState.Error -> {
                 hideLoader()
-                dataBinding().ipcLineChart.isVisible = false
+                dataBinding().containerNestedScrollView.isGone = true
                 dataBinding().errorLayout.commonNestedScrollView.isVisible = true
             }
         }

@@ -1,3 +1,4 @@
+include(":topten")
 include(":shared")
 include(":ipc")
 include(":app")

@@ -2,7 +2,7 @@ package net.portes.ipc.data.repository
 
 import net.portes.shared.models.Failure
 import net.portes.ipc.domain.datasource.IpcDataSource
-import net.portes.ipc.domain.model.IpcDto
+import net.portes.ipc.domain.models.IpcDto
 import net.portes.ipc.domain.repository.IpcRepository
 import net.portes.shared.models.Either
 import javax.inject.Inject

@@ -69,6 +69,15 @@ object Dependencies {
         "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeRefresh}"
     )
 
+    val EPOXY = listOf(
+        "com.airbnb.android:epoxy:${Versions.epoxy}",
+        "com.airbnb.android:epoxy-databinding:${Versions.epoxy}"
+    )
+
+    val EPOXY_KAPT = listOf(
+        "com.airbnb.android:epoxy-processor:${Versions.epoxy}"
+    )
+
     val TESTS = listOf(
         "junit:junit:${Versions.junit}",
         "org.mockito:mockito-inline:${Versions.mockitoInline}",

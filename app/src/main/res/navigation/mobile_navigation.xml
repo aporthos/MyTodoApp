@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_ipc" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="net.portes.mytodo.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_topten"
+        android:name="net.portes.mytodo.ui.topten.TopTenFragment"
+        android:label="@string/title_topten"
+        tools:layout="@layout/fragment_topten" />
 
     <fragment
         android:id="@+id/navigation_notifications"

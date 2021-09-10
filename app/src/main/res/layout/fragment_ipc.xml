@@ -24,116 +24,127 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.core.widget.NestedScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <include
+                android:id="@+id/errorLayout"
+                layout="@layout/layout_common_error"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <include
-                    android:id="@+id/errorLayout"
-                    layout="@layout/layout_common_error"
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/containerNestedScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/common_dimen_0dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:id="@+id/linearLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/common_dimen_0dp"
-                    android:layout_margin="@dimen/common_dimen_16dp"
-                    android:layout_marginStart="@dimen/common_dimen_16dp"
-                    android:layout_marginTop="@dimen/common_dimen_16dp"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                    <TextView
-                        android:id="@+id/totalBalanceTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/common_dimen_8dp"
-                        android:background="@drawable/round_border_view"
-                        android:text="$200,000.00"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/teal_700"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Balance Total"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/teal_200" />
-
-                    <com.github.mikephil.charting.charts.LineChart
-                        android:id="@+id/ipcLineChart"
+                    <LinearLayout
+                        android:id="@+id/contentLinearLayout"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/common_dimen_300dp"
-                        android:layout_marginTop="@dimen/common_dimen_8dp" />
+                        android:layout_height="@dimen/common_dimen_0dp"
+                        android:layout_margin="@dimen/common_dimen_16dp"
+                        android:layout_marginStart="@dimen/common_dimen_16dp"
+                        android:layout_marginTop="@dimen/common_dimen_16dp"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                    <HorizontalScrollView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/common_dimen_8dp"
-                        android:scrollbars="none">
 
-                        <com.google.android.material.chip.ChipGroup
-                            android:id="@+id/ipcChipGroup"
+                        <TextView
+                            android:id="@+id/totalBalanceTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:singleSelection="true">
+                            android:layout_marginTop="@dimen/common_dimen_8dp"
+                            android:background="@drawable/round_border_view"
+                            android:text="@string/message_balance_default"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/teal_700"
+                            android:textSize="@dimen/text_size_24sp"
+                            android:textStyle="bold" />
 
-                            <com.google.android.material.chip.Chip
-                                android:id="@+id/ipcToday"
-                                style="@style/Widget.MaterialComponents.Chip.Filter"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/message_balance"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/teal_200" />
+
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/ipcLineChart"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/common_dimen_300dp"
+                            android:layout_marginTop="@dimen/common_dimen_8dp" />
+
+                        <HorizontalScrollView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/common_dimen_8dp"
+                            android:scrollbars="none">
+
+                            <com.google.android.material.chip.ChipGroup
+                                android:id="@+id/ipcChipGroup"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/message_ipc_today" />
+                                app:singleSelection="true">
 
-                            <com.google.android.material.chip.Chip
-                                android:id="@+id/ipcSinceTwelveHours"
-                                style="@style/Widget.MaterialComponents.Chip.Filter"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/message_since_twelve_hours" />
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/ipcToday"
+                                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/message_ipc_today" />
 
-                            <com.google.android.material.chip.Chip
-                                android:id="@+id/ipcSinceFourHours"
-                                style="@style/Widget.MaterialComponents.Chip.Filter"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/message_since_four_hours" />
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/ipcSinceTwelveHours"
+                                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/message_since_twelve_hours" />
 
-                        </com.google.android.material.chip.ChipGroup>
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/ipcSinceFourHours"
+                                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/message_since_four_hours" />
 
-                    </HorizontalScrollView>
+                            </com.google.android.material.chip.ChipGroup>
 
-                    <TextView
-                        android:id="@+id/whatIsIPCTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/common_dimen_24dp"
-                        android:layout_marginBottom="@dimen/common_dimen_8dp"
-                        android:autoLink="web"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:text="@string/message_what_is_ipc" />
-                </LinearLayout>
+                        </HorizontalScrollView>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                        <TextView
+                            android:id="@+id/whatIsIPCTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/common_dimen_24dp"
+                            android:layout_marginBottom="@dimen/common_dimen_8dp"
+                            android:autoLink="web"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:text="@string/message_what_is_ipc" />
+                    </LinearLayout>
 
-        </androidx.core.widget.NestedScrollView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.core.widget.NestedScrollView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 

@@ -1,6 +1,7 @@
 package net.portes.shared.extensions
 
 import net.portes.shared.util.MONEY_FORMAT
+import net.portes.shared.util.PERCENTAGE_FORMAT
 import java.text.DecimalFormat
 
 /**
@@ -17,4 +18,9 @@ inline fun <T> Iterable<T>.sumByFloat(selector: (T) -> Float): Float {
 fun Float.parseMoney(): String {
     val formatter = DecimalFormat(MONEY_FORMAT)
     return "$${formatter.format(this)}"
+}
+
+fun Float.parsePercentage(): String {
+    val formatter = DecimalFormat(PERCENTAGE_FORMAT)
+    return formatter.format(this)
 }

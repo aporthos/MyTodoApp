@@ -6,8 +6,7 @@ import net.portes.ipc.data.models.response.IpcResponse
 import net.portes.ipc.data.services.IpcService
 import net.portes.shared.NetworkHandler
 import net.portes.shared.models.Either
-import okhttp3.MediaType
-import okhttp3.ResponseBody
+import net.portes.shared.util.anyError
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -58,7 +57,7 @@ class IpcDataSourceImplTest {
     @Test
     fun `validate data source get ipc failed`() {
         // Given
-        `when`(call.execute()).thenReturn(error(401, createError()))
+        `when`(call.execute()).thenReturn(error(401, anyError()))
         `when`(service.getIpc()).thenReturn(call)
         `when`(networkHandler.isNetworkAvailable()).thenReturn(true)
 
@@ -80,14 +79,5 @@ class IpcDataSourceImplTest {
         //Then
         assertEquals(true, data is Either.Left)
     }
-
-    private fun createError() = ResponseBody.create(
-        MediaType.parse("application/json"), """
-                {
-                    "code": "InvalidCredentials",
-                    "message": "That hash, timestamp and key combination is invalid."
-                }
-            """.trimIndent()
-    )
 
 }

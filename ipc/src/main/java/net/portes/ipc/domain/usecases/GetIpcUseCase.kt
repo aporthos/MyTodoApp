@@ -2,7 +2,7 @@ package net.portes.ipc.domain.usecases
 
 import net.portes.shared.models.Failure
 import kotlinx.coroutines.CoroutineDispatcher
-import net.portes.ipc.domain.model.IpcDto
+import net.portes.ipc.domain.models.IpcDto
 import net.portes.ipc.domain.repository.IpcRepository
 import net.portes.shared.domain.usecase.UseCase
 import net.portes.shared.models.Either

@@ -3,5 +3,6 @@
     <color name="white_opacity">#ccffffff</color>
     <color name="white">#FFFFFFFF</color>
     <color name="pickled_bluewood">#24394A</color>
-
+    <color name="green">#388e3c</color>
+    <color name="red">#e53935</color>
 </resources>

@@ -27,4 +27,5 @@ object Versions {
     const val lottie = "3.4.1"
     const val androidChart = "v3.1.0"
     const val swipeRefresh = "1.1.0"
+    const val epoxy = "4.4.4"
 }

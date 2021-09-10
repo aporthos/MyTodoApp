@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import net.portes.shared.models.Failure
 import kotlinx.coroutines.launch
-import net.portes.ipc.domain.model.IpcDto
+import net.portes.ipc.domain.models.IpcDto
 import net.portes.ipc.domain.usecases.GetIpcUseCase
 import net.portes.shared.extensions.addHours
 import net.portes.shared.extensions.sumByFloat
@@ -43,6 +43,7 @@ class IpcViewModel @ViewModelInject constructor(private val getIpcUseCase: GetIp
         _ipcResponse.value = ViewState.Error(proccessError(failure))
     }
 
+    // TODO: 09/09/21 This function is only for simulation
     fun toFilter(filter: Int) {
         val date = Date().addHours(filter).time
         val ipcListFilter = ipcList.filter { it.dateTimeStamp < date }

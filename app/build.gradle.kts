@@ -59,10 +59,13 @@ dependencies {
     implementation(Dependencies.RETROFIT)
     implementation(Dependencies.ANDROID_CHART)
     implementation(Dependencies.SWIPE_REFRESH)
+    implementation(Dependencies.EPOXY)
+    kapt(Dependencies.EPOXY_KAPT)
 
     testImplementation(Dependencies.TESTS)
     testImplementation(Dependencies.TESTS_COROUTINES)
 
     implementation(project(":ipc"))
+    implementation(project(":topten"))
     implementation(project(":shared"))
 }
