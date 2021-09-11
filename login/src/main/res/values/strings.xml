@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="message_use_fingerprint">Usar huella digital</string>
+    <string name="message_use_anonymous">Iniciar anonimamente</string>
+    <string name="message_signin">SignIn</string>
+    <string name="message_description_fingerprint">Usa tu huella para poder acceder a la aplicación</string>
+    <string name="message_description_anonymous">Inicia sesion anonimamente para poder acceder a la aplicación</string>
+    <string name="message_also_signin">Tambien puedes usar...</string>
+    <string name="message_subtitle_fingerprint">Inicia sesión facilmente</string>
+    <string name="message_caninit_fingerprint">Para poder iniciar...</string>
+</resources>

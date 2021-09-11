@@ -1,3 +1,4 @@
+include(":login")
 include(":topten")
 include(":shared")
 include(":ipc")

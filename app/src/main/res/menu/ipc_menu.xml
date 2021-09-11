@@ -5,5 +5,10 @@
         android:id="@+id/action_refresh"
         android:icon="@drawable/refresh"
         android:title="@string/message_refresh"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_logout"
+        android:title="@string/message_logout"
+        app:showAsAction="withText" />
 </menu>

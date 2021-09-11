@@ -7,6 +7,7 @@ import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -15,6 +16,7 @@ import net.portes.ipc.domain.models.IpcDto
 import net.portes.mytodo.R
 import net.portes.mytodo.databinding.FragmentIpcBinding
 import net.portes.mytodo.ui.base.BaseFragment
+import net.portes.mytodo.ui.login.LoginActivity
 import net.portes.shared.extensions.observe
 import net.portes.shared.extensions.parseMoney
 import net.portes.shared.ui.base.ViewState
@@ -25,7 +27,6 @@ import net.portes.shared.util.ZERO_INT
 class IpcFragment : BaseFragment<FragmentIpcBinding>(), View.OnClickListener {
 
     companion object {
-        const val TAG = "IpcFragment"
         const val TODAY_HOURS = 24
         const val TWELVE_TODAY = 12
         const val FOUR_TODAY = 4
@@ -36,7 +37,6 @@ class IpcFragment : BaseFragment<FragmentIpcBinding>(), View.OnClickListener {
     override fun getLayoutRes(): Int = R.layout.fragment_ipc
 
     override fun initializeView() {
-        viewModel.getListIpc()
         dataBinding().errorLayout.retryButton.setOnClickListener(this)
         dataBinding().ipcChipGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
@@ -47,11 +47,13 @@ class IpcFragment : BaseFragment<FragmentIpcBinding>(), View.OnClickListener {
         }
         toCreateMenu()
         toCreateLink()
+        viewModel.getListIpc()
     }
 
     override fun initObservers() {
         observe(viewModel.ipcResponse, ::resultIpc)
         observe(viewModel.totalBalance, ::resultTotalBalance)
+        observe(viewModel.toLogout, ::resultToLogout)
     }
 
     override fun onClick(v: View?) {
@@ -86,7 +88,11 @@ class IpcFragment : BaseFragment<FragmentIpcBinding>(), View.OnClickListener {
             when (it.itemId) {
                 R.id.action_refresh -> {
                     viewModel.getListIpc()
-                    false
+                    true
+                }
+                R.id.action_logout -> {
+                    viewModel.toLogout()
+                    true
                 }
                 else -> false
             }
@@ -119,6 +125,17 @@ class IpcFragment : BaseFragment<FragmentIpcBinding>(), View.OnClickListener {
                 dataBinding().errorLayout.commonNestedScrollView.isVisible = true
             }
         }
+    }
+
+    private fun resultToLogout(result: Unit) {
+        context?.let {
+            LoginActivity.launch(activity as AppCompatActivity)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        hideLoader()
     }
 
     private fun resultTotalBalance(totalBalance: Float) {

@@ -12,13 +12,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="false"
-            android:theme="@style/Theme.MarvelApp.AppBarOverlay">
+            android:theme="@style/Theme.MyTodo.AppBarOverlay">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 style="@style/Widget.MaterialComponents.Toolbar.Primary"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/Theme.MyTodo.PopupOverlay"
                 app:menu="@menu/ipc_menu"
                 app:title="@string/app_name" />
 

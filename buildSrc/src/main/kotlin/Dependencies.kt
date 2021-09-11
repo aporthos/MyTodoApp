@@ -78,6 +78,18 @@ object Dependencies {
         "com.airbnb.android:epoxy-processor:${Versions.epoxy}"
     )
 
+    val BIOMETRIC = listOf(
+        "androidx.biometric:biometric:${Versions.biometric}"
+    )
+
+    val FIREBASE = listOf(
+        "com.google.firebase:firebase-auth:${Versions.firebaseAuth}"
+    )
+
+    val COROUTINES_PLAY_SERVICES = listOf(
+        "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${Versions.coroutinesPlayServices}"
+    )
+
     val TESTS = listOf(
         "junit:junit:${Versions.junit}",
         "org.mockito:mockito-inline:${Versions.mockitoInline}",

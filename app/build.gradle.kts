@@ -7,6 +7,7 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -61,11 +62,14 @@ dependencies {
     implementation(Dependencies.SWIPE_REFRESH)
     implementation(Dependencies.EPOXY)
     kapt(Dependencies.EPOXY_KAPT)
+    implementation(Dependencies.BIOMETRIC)
+    implementation(Dependencies.FIREBASE)
 
     testImplementation(Dependencies.TESTS)
     testImplementation(Dependencies.TESTS_COROUTINES)
 
     implementation(project(":ipc"))
     implementation(project(":topten"))
+    implementation(project(":login"))
     implementation(project(":shared"))
 }

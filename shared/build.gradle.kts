@@ -52,6 +52,7 @@ dependencies {
     implementation(Dependencies.TIMBER)
     implementation(Dependencies.COROUTINES)
     implementation(Dependencies.LOTTIE)
+    implementation(Dependencies.BIOMETRIC)
 
     testImplementation(Dependencies.TESTS)
     testImplementation(Dependencies.TESTS_COROUTINES)

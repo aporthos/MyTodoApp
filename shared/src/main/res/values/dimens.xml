@@ -10,6 +10,7 @@
     <dimen name="common_dimen_16dp">16dp</dimen>
     <dimen name="common_dimen_24dp">24dp</dimen>
     <dimen name="common_dimen_30dp">30dp</dimen>
+    <dimen name="common_dimen_32dp">32dp</dimen>
     <dimen name="common_dimen_300dp">300dp</dimen>
     <dimen name="common_dimen_150dp">150dp</dimen>
 

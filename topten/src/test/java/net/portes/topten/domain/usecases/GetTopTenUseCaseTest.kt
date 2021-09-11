@@ -10,7 +10,7 @@ import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito
+import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 
 /**
@@ -29,7 +29,7 @@ class GetTopTenUseCaseTest {
 
     @Test
     fun `validation use case success`() = runBlockingTest {
-        Mockito.`when`(repository.getTopTen()).thenReturn(Either.Right(emptyList()))
+        `when`(repository.getTopTen()).thenReturn(Either.Right(emptyList()))
 
         val ipcUseCase = useCase(Unit)
         assertEquals(true, ipcUseCase is Either.Right)
@@ -37,7 +37,7 @@ class GetTopTenUseCaseTest {
 
     @Test
     fun `validation use case failed`() = runBlockingTest {
-        Mockito.`when`(repository.getTopTen()).thenReturn(Either.Left(Failure.ServerError))
+        `when`(repository.getTopTen()).thenReturn(Either.Left(Failure.ServerError))
 
         val ipcUseCase = useCase(Unit)
         assertEquals(true, ipcUseCase is Either.Left)

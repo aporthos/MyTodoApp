@@ -22,5 +22,5 @@ fun Float.parseMoney(): String {
 
 fun Float.parsePercentage(): String {
     val formatter = DecimalFormat(PERCENTAGE_FORMAT)
-    return formatter.format(this)
+    return "${formatter.format(this)}%"
 }
