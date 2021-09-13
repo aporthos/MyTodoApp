@@ -46,12 +46,6 @@ class IpcViewModel @ViewModelInject constructor(
         }
     }
 
-    private fun toGetIpcSuccess(ipcList: List<IpcDto>) {
-        _ipcResponse.value = ViewState.Success(ipcList)
-        _totalBalance.value = ipcList.sumByFloat { it.price }
-        this.ipcList = ipcList.toMutableList()
-    }
-
     // TODO: 09/09/21 This function is only for simulation
     fun toFilter(filter: Int) {
         val date = Date().addHours(filter).time
@@ -65,10 +59,14 @@ class IpcViewModel @ViewModelInject constructor(
         _toLogout.value = Unit
     }
 
+    private fun toGetIpcSuccess(ipcList: List<IpcDto>) {
+        _ipcResponse.value = ViewState.Success(ipcList)
+        _totalBalance.value = ipcList.sumByFloat { it.price }
+        this.ipcList = ipcList.toMutableList()
+    }
+
     private fun toGetIpcFailure(failure: Failure) {
         _ipcResponse.value = ViewState.Error(proccessError(failure))
     }
-
-
 
 }

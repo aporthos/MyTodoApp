@@ -1,7 +1,6 @@
 package net.portes.mytodo.ui.login
 
 import android.content.Intent
-import android.graphics.pdf.PdfDocument
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -58,9 +57,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(), View.OnClickListener
         if (!isBiometricSuccess()) {
             toConfigLoginAnonymous()
         }
-
-        val pdfDocument = PdfDocument()
-
     }
 
     override fun initListeners() {

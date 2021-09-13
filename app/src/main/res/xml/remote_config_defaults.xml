@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+    <entry>
+        <key>urlIpc</key>
+        <value>https://economipedia.com/definiciones/ipc-indice-precios-al-consumo.html</value>
+    </entry>
+    <entry>
+        <key>timeRefresh</key>
+        <value>10000</value>
+    </entry>
+</defaultsMap>

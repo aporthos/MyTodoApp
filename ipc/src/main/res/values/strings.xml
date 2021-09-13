@@ -4,10 +4,12 @@
     <string name="description_ipc_line_chart">Indice IPC</string>
     <string name="message_what_is_ipc">Que es el IPC?</string>
     <string name="message_refresh">Actualizar</string>
+    <string name="message_share">Compartir</string>
     <string name="message_logout">Cerrar sesión</string>
     <string name="message_ipc_today">Hoy</string>
     <string name="message_since_twelve_hours">Hace 12 horas</string>
     <string name="message_since_four_hours">Hace 4 horas</string>
     <string name="message_balance_default">$0,0.00</string>
     <string name="message_balance">Balance Total</string>
+    <string name="message_permissions_read_write">Concede los accesos</string>
 </resources>

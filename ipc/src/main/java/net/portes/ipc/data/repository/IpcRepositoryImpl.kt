@@ -16,4 +16,6 @@ class IpcRepositoryImpl @Inject constructor(private val dataSource: IpcDataSourc
 
     override fun getIpc(): Either<Failure, List<IpcDto>> = dataSource.getIpc()
 
+    override suspend fun getIpcUrl(): Either<Failure, Boolean> = dataSource.getIpcUrl()
+
 }

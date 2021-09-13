@@ -83,11 +83,20 @@ object Dependencies {
     )
 
     val FIREBASE = listOf(
-        "com.google.firebase:firebase-auth:${Versions.firebaseAuth}"
+        "com.google.firebase:firebase-auth-ktx:${Versions.firebaseAuth}",
+        "com.google.firebase:firebase-config-ktx:${Versions.firebaseConfig}"
     )
 
     val COROUTINES_PLAY_SERVICES = listOf(
         "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${Versions.coroutinesPlayServices}"
+    )
+
+    val EASY_PERMISSIONS = listOf(
+        "com.vmadalin:easypermissions-ktx:${Versions.easyPermissions}"
+    )
+
+    val ITEXT_PDF = listOf(
+        "com.itextpdf:itext7-core:${Versions.itext}"
     )
 
     val TESTS = listOf(
@@ -107,6 +116,13 @@ object Dependencies {
             add("implementation", dependency)
         }
     }
+
+    // TODO: 11/09/21 Review firebase boom
+    /*fun DependencyHandler.implementationPlatform(list: List<String>) {
+        list.forEach { dependency ->
+            platform(dependency)
+        }
+    } */
 
     fun DependencyHandler.testImplementation(list: List<String>) {
         list.forEach { dependency ->

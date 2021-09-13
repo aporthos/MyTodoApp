@@ -29,7 +29,10 @@ object Versions {
     const val swipeRefresh = "1.1.0"
     const val epoxy = "4.4.4"
     const val biometric = "1.0.1"
-    const val firebaseAuth = "20.0.0"
+    const val firebaseAuth = "21.0.1"
+    const val firebaseConfig = "21.0.1"
     const val googlePlayServices = "4.3.4"
     const val coroutinesPlayServices = "1.1.1"
+    const val easyPermissions = "1.0.0"
+    const val itext = "7.1.3"
 }

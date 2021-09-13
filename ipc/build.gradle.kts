@@ -48,6 +48,8 @@ dependencies {
     kapt(Dependencies.HILT_KAPT)
     implementation(Dependencies.COROUTINES)
     implementation(Dependencies.TIMBER)
+    implementation(Dependencies.FIREBASE)
+    implementation(Dependencies.COROUTINES_PLAY_SERVICES)
 
     testImplementation(Dependencies.TESTS)
     testImplementation(Dependencies.TESTS_COROUTINES)

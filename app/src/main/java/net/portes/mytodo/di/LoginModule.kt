@@ -3,6 +3,8 @@ package net.portes.mytodo.di
 import android.content.Context
 import androidx.biometric.BiometricPrompt
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,9 +24,7 @@ import javax.inject.Singleton
 object LoginModule {
 
     @Provides
-    fun providesFirebaseAuth(): FirebaseAuth {
-        return FirebaseAuth.getInstance()
-    }
+    fun providesFirebaseAuth(): FirebaseAuth = Firebase.auth
 
     @Singleton
     @Provides

@@ -45,6 +45,11 @@ android {
     buildFeatures {
         dataBinding = true
     }
+
+    packagingOptions {
+        exclude("com/itextpdf/io/font/cmap_info.txt")
+        exclude("com/itextpdf/io/font/cmap/*")
+    }
 }
 
 dependencies {
@@ -63,7 +68,9 @@ dependencies {
     implementation(Dependencies.EPOXY)
     kapt(Dependencies.EPOXY_KAPT)
     implementation(Dependencies.BIOMETRIC)
+    implementation(Dependencies.EASY_PERMISSIONS)
     implementation(Dependencies.FIREBASE)
+    implementation(Dependencies.ITEXT_PDF)
 
     testImplementation(Dependencies.TESTS)
     testImplementation(Dependencies.TESTS_COROUTINES)

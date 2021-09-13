@@ -9,4 +9,5 @@ import net.portes.shared.models.Either
  */
 interface IpcRepository {
     fun getIpc() : Either<Failure, List<IpcDto>>
+    suspend fun getIpcUrl() : Either<Failure, Boolean>
 }

@@ -1,36 +1,40 @@
 package net.portes.mytodo.ui.ipc
 
-import android.content.Intent
-import android.net.Uri
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
+import android.Manifest.permission.READ_EXTERNAL_STORAGE
+import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.ktx.get
+import com.vmadalin.easypermissions.EasyPermissions
+import com.vmadalin.easypermissions.dialogs.SettingsDialog
 import dagger.hilt.android.AndroidEntryPoint
 import net.portes.ipc.domain.models.IpcDto
 import net.portes.mytodo.R
 import net.portes.mytodo.databinding.FragmentIpcBinding
 import net.portes.mytodo.ui.base.BaseFragment
 import net.portes.mytodo.ui.login.LoginActivity
-import net.portes.shared.extensions.observe
-import net.portes.shared.extensions.parseMoney
+import net.portes.shared.extensions.*
 import net.portes.shared.ui.base.ViewState
-import net.portes.shared.util.URL_IPC
-import net.portes.shared.util.ZERO_INT
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class IpcFragment : BaseFragment<FragmentIpcBinding>(), View.OnClickListener {
+class IpcFragment : BaseFragment<FragmentIpcBinding>(), View.OnClickListener,
+    EasyPermissions.PermissionCallbacks {
 
     companion object {
         const val TODAY_HOURS = 24
         const val TWELVE_TODAY = 12
         const val FOUR_TODAY = 4
+        private const val RC_WRITE_READ_EXTERNAL_STORAGE = 1
+        private const val KEY_URL_IPC = "urlIpc"
     }
+
+    @Inject
+    lateinit var firebaseRemoteConfig: FirebaseRemoteConfig
 
     private val viewModel: IpcViewModel by viewModels()
 
@@ -62,25 +66,39 @@ class IpcFragment : BaseFragment<FragmentIpcBinding>(), View.OnClickListener {
         }
     }
 
+    override fun onPermissionsDenied(requestCode: Int, perms: List<String>) {
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            SettingsDialog.Builder(requireActivity()).build().show()
+        } else {
+            requestPermissions()
+        }
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, perms: List<String>) {
+        dataBinding().contentLinearLayout.takeScreen()?.toSaveStorage(requireContext()) {
+            requireContext().toShareEmail(text = "", imageFile = it)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    }
+
     private fun toCreateLink() {
-        dataBinding().whatIsIPCTextView.movementMethod = LinkMovementMethod.getInstance()
-        val clickableSpan = object : ClickableSpan() {
-            override fun onClick(widget: View) {
-                val intent = Intent(Intent.ACTION_VIEW).apply {
-                    data = Uri.parse(URL_IPC)
-                }
-                startActivity(intent)
-            }
+        val url = firebaseRemoteConfig[KEY_URL_IPC].asString()
+        if (!url.isValidUrl()) {
+            dataBinding().whatIsIPCTextView.isVisible = false
+            return
         }
 
-        val spannableString = SpannableString(getString(R.string.message_what_is_ipc))
-        spannableString.setSpan(
-            clickableSpan,
-            ZERO_INT,
-            getString(R.string.message_what_is_ipc).length,
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        dataBinding().whatIsIPCTextView.text = spannableString
+        dataBinding().whatIsIPCTextView.clickLink(R.string.message_what_is_ipc) {
+            requireContext().browse(url)
+        }
     }
 
     private fun toCreateMenu() {
@@ -94,8 +112,27 @@ class IpcFragment : BaseFragment<FragmentIpcBinding>(), View.OnClickListener {
                     viewModel.toLogout()
                     true
                 }
+                R.id.action_share -> {
+                    requestPermissions()
+                    true
+                }
                 else -> false
             }
+        }
+    }
+
+    private fun requestPermissions() {
+        if (hasReadAndWriteExternalStorage()) {
+            dataBinding().contentLinearLayout.takeScreen()?.toSaveStorage(requireContext()) {
+                requireContext().toShareEmail(text = "", imageFile = it)
+            }
+        } else {
+            EasyPermissions.requestPermissions(
+                this,
+                getString(R.string.message_permissions_read_write),
+                RC_WRITE_READ_EXTERNAL_STORAGE,
+                WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE
+            )
         }
     }
 
@@ -128,18 +165,22 @@ class IpcFragment : BaseFragment<FragmentIpcBinding>(), View.OnClickListener {
     }
 
     private fun resultToLogout(result: Unit) {
-        context?.let {
-            LoginActivity.launch(activity as AppCompatActivity)
-        }
+        LoginActivity.launch(activity as AppCompatActivity)
+    }
+
+    private fun hasReadAndWriteExternalStorage(): Boolean = EasyPermissions.hasPermissions(
+        requireContext(),
+        READ_EXTERNAL_STORAGE,
+        WRITE_EXTERNAL_STORAGE
+    )
+
+    private fun resultTotalBalance(totalBalance: Float) {
+        dataBinding().totalBalanceTextView.text = totalBalance.parseMoney()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         hideLoader()
-    }
-
-    private fun resultTotalBalance(totalBalance: Float) {
-        dataBinding().totalBalanceTextView.text = totalBalance.parseMoney()
     }
 
 }

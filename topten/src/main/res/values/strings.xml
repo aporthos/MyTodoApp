@@ -3,4 +3,7 @@
     <string name="title_topten_type_ups">Alzas</string>
     <string name="title_topten_type_downs">Bajas</string>
     <string name="title_topten_type_volume">Volumen</string>
+    <string name="title_topten_market">Top Ten’s del Mercado</string>
+    <string name="message_issue_id">Issue Id</string>
+    <string name="message_last_price_percentage_change">Ultimo Precio/Porcentage de cambio</string>
 </resources>
