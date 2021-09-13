@@ -8,8 +8,6 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import net.portes.mytodo.R
-import net.portes.shared.ui.widget.AlertDialog
 import net.portes.shared.ui.widget.LoaderDialog
 
 /**
@@ -57,22 +55,6 @@ abstract class BaseFragment<DB : ViewDataBinding> : Fragment() {
 
     protected fun hideLoader() {
         loaderDialog?.dismiss()
-    }
-
-    // TODO: 08/09/21 Revisar uso de alerts
-    fun toShowDialog(
-        title: Int = R.string.title_error_dialog,
-        message: String,
-        acceptListener: () -> Unit = {}
-    ) {
-        activity?.supportFragmentManager?.let {
-            AlertDialog.newInstance(title = title, message = message).apply {
-                show(it, AlertDialog.TAG)
-                setAcceptListener {
-                    acceptListener.invoke()
-                }
-            }
-        }
     }
 
 }

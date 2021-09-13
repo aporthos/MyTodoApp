@@ -26,12 +26,6 @@ android {
     }
 
     signingConfigs {
-        getByName("debug") {
-            keyAlias = KeyHelper.getValue(KeyHelper.KEY_ALIAS)
-            keyPassword = KeyHelper.getValue(KeyHelper.KEY_PASS)
-            storeFile = file(KeyHelper.getValue(KeyHelper.KEY_STORE_FILE))
-            storePassword = KeyHelper.getValue(KeyHelper.KEY_STORE_PASS)
-        }
         create("release") {
             keyAlias = KeyHelper.getValue(KeyHelper.KEY_ALIAS)
             keyPassword = KeyHelper.getValue(KeyHelper.KEY_PASS)
@@ -42,7 +36,6 @@ android {
 
     buildTypes {
         getByName("debug") {
-            signingConfig = signingConfigs.getByName("debug")
             isDebuggable = true
         }
         getByName("release") {
