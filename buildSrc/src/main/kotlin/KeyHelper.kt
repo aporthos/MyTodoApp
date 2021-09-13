@@ -10,7 +10,7 @@ object KeyHelper {
     const val KEY_STORE_PASS = "storePassword"
     const val KEY_ALIAS = "keyAlias"
     const val KEY_PASS = "keyPassword"
-    private const val PRIVATE_PROPERTIES = "/Documents/MyTodo/keystore.properties"
+    private const val PRIVATE_PROPERTIES = "/Documents/MyTodoConfig/keystore.properties"
     private val properties by lazy {
         Properties().apply { load(FileInputStream(File("${System.getProperty("user.home")}$PRIVATE_PROPERTIES"))) }
     }
