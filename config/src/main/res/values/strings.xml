@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="message_share_default">Hola, checa esta versión mas reciente :)</string>
+    <string name="message_share_default_not_empty">Este campo es requerido</string>
+    <string name="message_share_default_success">Se actualizo correctamente</string>
+    <string name="hint_share_default">Mensage por default para compartir archivos..</string>
+    <string name="message_share_default_update">Actualizar</string>
+</resources>

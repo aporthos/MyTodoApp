@@ -34,5 +34,5 @@ object Versions {
     const val googlePlayServices = "4.3.4"
     const val coroutinesPlayServices = "1.1.1"
     const val easyPermissions = "1.0.0"
-    const val itext = "7.1.3"
+    const val itext = "7.1.16"
 }

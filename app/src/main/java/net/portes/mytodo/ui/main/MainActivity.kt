@@ -13,7 +13,6 @@ import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import net.portes.mytodo.R
 import net.portes.mytodo.ui.login.LoginActivity
-import net.portes.mytodo.ui.login.LoginSharedPref
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -26,9 +25,6 @@ class MainActivity : AppCompatActivity() {
             from.finish()
         }
     }
-
-    @Inject
-    lateinit var loginSharedPref: LoginSharedPref
 
     @Inject
     lateinit var firebaseAuth: FirebaseAuth
@@ -47,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_ipc, R.id.navigation_topten, R.id.navigation_notifications
+                R.id.navigation_ipc, R.id.navigation_topten, R.id.navigation_config
             )
         )
         navView.setupWithNavController(navController)

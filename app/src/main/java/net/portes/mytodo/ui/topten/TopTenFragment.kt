@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.dialogs.SettingsDialog
 import dagger.hilt.android.AndroidEntryPoint
+import net.portes.config.prefs.ConfigSharedPref
 import net.portes.mytodo.R
 import net.portes.mytodo.databinding.FragmentToptenBinding
 import net.portes.mytodo.ui.base.BaseFragment
@@ -18,6 +19,7 @@ import net.portes.shared.extensions.toShareEmail
 import net.portes.shared.ui.base.ViewState
 import net.portes.topten.domain.models.TopTenItem
 import java.io.File
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class TopTenFragment : BaseFragment<FragmentToptenBinding>(), EasyPermissions.PermissionCallbacks, View.OnClickListener {
@@ -25,6 +27,9 @@ class TopTenFragment : BaseFragment<FragmentToptenBinding>(), EasyPermissions.Pe
     companion object {
         private const val RC_WRITE_READ_EXTERNAL_STORAGE = 1
     }
+
+    @Inject
+    lateinit var configSharedPref: ConfigSharedPref
 
     private val viewModel: TopTenViewModel by viewModels()
 
@@ -139,7 +144,10 @@ class TopTenFragment : BaseFragment<FragmentToptenBinding>(), EasyPermissions.Pe
     }
 
     private fun resultPdfDocument(result: File) {
-        requireContext().toShareEmail(text = "", imageFile = result)
+        requireContext().toShareEmail(
+            text = configSharedPref.messageShareDefault,
+            imageFile = result
+        )
     }
 
     private fun hasReadAndWriteExternalStorage(): Boolean = EasyPermissions.hasPermissions(

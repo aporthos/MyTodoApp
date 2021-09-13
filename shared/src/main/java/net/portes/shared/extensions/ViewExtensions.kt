@@ -15,7 +15,10 @@ import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
@@ -116,10 +119,10 @@ fun File.getUriForFile(context: Context): Uri = FileProvider.getUriForFile(
     this
 )
 
-fun Context.toShareEmail(text: String, subject: String = "", imageFile: File): Boolean {
+fun Context.toShareEmail(text: String, imageFile: File): Boolean {
     val imageUri = imageFile.getUriForFile(this)
     val intent = Intent(ACTION_SEND).apply {
-        putExtra(EXTRA_TEXT, "rerererer")
+        putExtra(EXTRA_TEXT, text)
         type = TYPE_EMAIL
         putExtra(EXTRA_STREAM, imageUri)
     }
@@ -193,4 +196,17 @@ private fun getDataColumn(context: Context, name: String): String? {
         cursor?.close()
     }
     return null
+}
+
+val EditText.value
+    get() = text.toString()
+
+fun Context?.toast(text: CharSequence, duration: Int = Toast.LENGTH_LONG) = this?.let { Toast.makeText(it, text, duration).show() }
+
+fun View.hideKeyboard(): Boolean {
+    try {
+        val inputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        return inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
+    } catch (ignored: RuntimeException) { }
+    return false
 }

@@ -12,6 +12,7 @@ import com.google.firebase.remoteconfig.ktx.get
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.dialogs.SettingsDialog
 import dagger.hilt.android.AndroidEntryPoint
+import net.portes.config.prefs.ConfigSharedPref
 import net.portes.ipc.domain.models.IpcDto
 import net.portes.mytodo.R
 import net.portes.mytodo.databinding.FragmentIpcBinding
@@ -35,6 +36,9 @@ class IpcFragment : BaseFragment<FragmentIpcBinding>(), View.OnClickListener,
 
     @Inject
     lateinit var firebaseRemoteConfig: FirebaseRemoteConfig
+
+    @Inject
+    lateinit var configSharedPref: ConfigSharedPref
 
     private val viewModel: IpcViewModel by viewModels()
 
@@ -76,7 +80,10 @@ class IpcFragment : BaseFragment<FragmentIpcBinding>(), View.OnClickListener,
 
     override fun onPermissionsGranted(requestCode: Int, perms: List<String>) {
         dataBinding().contentLinearLayout.takeScreen()?.toSaveStorage(requireContext()) {
-            requireContext().toShareEmail(text = "", imageFile = it)
+            requireContext().toShareEmail(
+                text = configSharedPref.messageShareDefault,
+                imageFile = it
+            )
         }
     }
 
@@ -124,7 +131,10 @@ class IpcFragment : BaseFragment<FragmentIpcBinding>(), View.OnClickListener,
     private fun requestPermissions() {
         if (hasReadAndWriteExternalStorage()) {
             dataBinding().contentLinearLayout.takeScreen()?.toSaveStorage(requireContext()) {
-                requireContext().toShareEmail(text = "", imageFile = it)
+                requireContext().toShareEmail(
+                    text = configSharedPref.messageShareDefault,
+                    imageFile = it
+                )
             }
         } else {
             EasyPermissions.requestPermissions(

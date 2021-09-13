@@ -1,3 +1,4 @@
+include(":config")
 include(":login")
 include(":topten")
 include(":shared")

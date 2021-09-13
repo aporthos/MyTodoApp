@@ -34,9 +34,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(), View.OnClickListener
     }
 
     @Inject
-    lateinit var loginSharedPref: LoginSharedPref
-
-    @Inject
     lateinit var promptInfo: BiometricPrompt.PromptInfo
 
     private val viewModel: LoginViewModel by viewModels()
@@ -47,10 +44,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(), View.OnClickListener
 
     override fun initializeView() {
         biometricPrompt = createFun(this, {
-            loginSharedPref.isLoggin = false
             toConfigLoginAnonymous()
         }, {
-            loginSharedPref.isLoggin = true
             viewModel.toLoginFirebase()
         })
 
@@ -96,7 +91,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(), View.OnClickListener
             is ViewState.Loading -> showLoader()
             is ViewState.Success -> {
                 hideLoader()
-                loginSharedPref.isLoggin = true
                 MainActivity.launch(this)
             }
             is ViewState.Error -> hideLoader()

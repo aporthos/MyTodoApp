@@ -9,7 +9,6 @@ import net.portes.shared.models.Failure
 import kotlinx.coroutines.launch
 import net.portes.ipc.domain.models.IpcDto
 import net.portes.ipc.domain.usecases.GetIpcUseCase
-import net.portes.mytodo.ui.login.LoginSharedPref
 import net.portes.shared.extensions.addHours
 import net.portes.shared.extensions.sumByFloat
 import net.portes.shared.ui.base.BaseViewModel
@@ -18,8 +17,7 @@ import java.util.*
 
 class IpcViewModel @ViewModelInject constructor(
     private val getIpcUseCase: GetIpcUseCase,
-    private var firebaseAuth: FirebaseAuth,
-    private val loginSharedPref: LoginSharedPref
+    private var firebaseAuth: FirebaseAuth
 ) : BaseViewModel() {
 
     private val _ipcResponse = MutableLiveData<ViewState<List<IpcDto>>>()
@@ -54,7 +52,6 @@ class IpcViewModel @ViewModelInject constructor(
     }
 
     fun toLogout() {
-        loginSharedPref.isLoggin = false
         firebaseAuth.signOut()
         _toLogout.value = Unit
     }

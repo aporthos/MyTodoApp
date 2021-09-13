@@ -5,7 +5,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import net.portes.ipc.domain.usecases.GetIpcUseCase
-import net.portes.mytodo.ui.login.LoginSharedPref
 import net.portes.shared.extensions.getThisValue
 import net.portes.shared.models.Either
 import net.portes.shared.models.Failure

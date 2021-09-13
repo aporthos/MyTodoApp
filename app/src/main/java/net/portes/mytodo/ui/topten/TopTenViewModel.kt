@@ -9,7 +9,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.get
 import kotlinx.coroutines.*
-import net.portes.mytodo.ui.login.LoginSharedPref
 import net.portes.mytodo.util.files.DocumentType
 import net.portes.mytodo.util.files.DocumentFactory
 import net.portes.shared.models.Failure
@@ -22,8 +21,7 @@ import java.io.File
 class TopTenViewModel @ViewModelInject constructor(
     private val getTopTenUseCase: GetTopTenUseCase,
     private val firebaseRemoteConfig: FirebaseRemoteConfig,
-    private var firebaseAuth: FirebaseAuth,
-    private val loginSharedPref: LoginSharedPref
+    private var firebaseAuth: FirebaseAuth
 ) :
     BaseViewModel() {
 
@@ -62,7 +60,6 @@ class TopTenViewModel @ViewModelInject constructor(
     }
 
     fun toLogout() {
-        loginSharedPref.isLoggin = false
         firebaseAuth.signOut()
         _toLogout.value = Unit
     }

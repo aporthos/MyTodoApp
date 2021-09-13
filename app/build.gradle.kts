@@ -25,13 +25,34 @@ android {
         buildConfigField("String", "BASE_URL", "\"https://run.mocky.io\"")
     }
 
+    signingConfigs {
+        getByName("debug") {
+            keyAlias = KeyHelper.getValue(KeyHelper.KEY_ALIAS)
+            keyPassword = KeyHelper.getValue(KeyHelper.KEY_PASS)
+            storeFile = file(KeyHelper.getValue(KeyHelper.KEY_STORE_FILE))
+            storePassword = KeyHelper.getValue(KeyHelper.KEY_STORE_PASS)
+        }
+        create("release") {
+            keyAlias = KeyHelper.getValue(KeyHelper.KEY_ALIAS)
+            keyPassword = KeyHelper.getValue(KeyHelper.KEY_PASS)
+            storeFile = file(KeyHelper.getValue(KeyHelper.KEY_STORE_FILE))
+            storePassword = KeyHelper.getValue(KeyHelper.KEY_STORE_PASS)
+        }
+    }
+
     buildTypes {
+        getByName("debug") {
+            signingConfig = signingConfigs.getByName("debug")
+            isDebuggable = true
+        }
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
+            isDebuggable = false
         }
     }
     compileOptions {
@@ -46,9 +67,11 @@ android {
         dataBinding = true
     }
 
-    packagingOptions {
-        exclude("com/itextpdf/io/font/cmap_info.txt")
-        exclude("com/itextpdf/io/font/cmap/*")
+    applicationVariants.all {
+        outputs.all {
+            (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl).outputFileName =
+                "$name-$versionName.apk"
+        }
     }
 }
 
@@ -78,5 +101,6 @@ dependencies {
     implementation(project(":ipc"))
     implementation(project(":topten"))
     implementation(project(":login"))
+    implementation(project(":config"))
     implementation(project(":shared"))
 }

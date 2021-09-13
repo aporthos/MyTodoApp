@@ -2,6 +2,6 @@
     <string name="app_name">MyTodo</string>
     <string name="title_ipc">Ipc</string>
     <string name="title_topten">Top Ten</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_config">Conguración</string>
     <string name="title_activity_login">LoginActivity</string>
 </resources>
